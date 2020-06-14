@@ -1,0 +1,23 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+}
+.dialogsItems a{
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 30%;
+}
+.messages {
+    padding: 10px;
+}
+
+.message {
+    color: #f4716a;
+
+}
