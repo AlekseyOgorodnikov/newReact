@@ -9,8 +9,7 @@ export function callSubscriber(state) {
     ReactDOM.render(
         <React.StrictMode>
             <App state={state}
-                 dispatch={store.dispatch.bind(store)}
-                 dispatchMessage={store.dispatchMessage.bind(store)}
+                dispatch={store.dispatch.bind(store)}
             />
         </React.StrictMode>,
         document.getElementById('root')

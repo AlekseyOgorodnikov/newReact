@@ -8,6 +8,6 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.appContent {
+.app-content {
     grid-area: content;
 }

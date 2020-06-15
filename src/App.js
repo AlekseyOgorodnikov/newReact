@@ -15,10 +15,10 @@ function App(props) {
             <div className="container">
                 <Header/>
                 <NavigationBar/>
-                <div className="appContent">
+                <div className="app-content">
                     <Route path='/dialogs' render={() => <Dialogs
                         dialogsPage={props.state.dialogsPage}
-                        dispatchMessage={props.dispatchMessage}
+                        dispatch={props.dispatch}
                     />}/>
                     <Route path='/profile' render={() => <Profile
                         profilePage={props.state.profilePage}

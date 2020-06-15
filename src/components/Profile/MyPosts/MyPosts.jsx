@@ -1,36 +1,42 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { addPostActionCreator, updateNewPostText } from "../../../Redux/profileReducer";
 
 function MyPosts(props) {
-    let postsElement = props.posts.map(posts => <Post likesCount={posts.likeCounts} message={posts.message}/>)
+  let postsElement = props.posts.map((posts) => (
+    <Post likesCount={posts.likeCounts} message={posts.message} />
+  ));
 
-    let newPostElement = React.createRef();
+  let newPostElement = React.createRef();
 
-    function addPost() {
-        props.dispatch({type:'ADD-POST'});
-    }
+  function addPost() {
+    props.dispatch(addPostActionCreator());
+  }
 
-    function onPostChange() {
-        let text = newPostElement.current.value;
-        props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText: text});
-    }
+  function onPostChange() {
+    let text = newPostElement.current.value;
+    props.dispatch(updateNewPostText(text));
+  }
 
-    return (
-        <div className={classes.postsBlock}>
-            <h3>My-post</h3>
-            <div>
-                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
-            </div>
-            <div className={classes.button}>
-                <button onClick={addPost}>Добавить пост</button>
-            </div>
+  return (
+    <div className={classes.postsBlock}>
+      <h3>My-post</h3>
+      <div>
+        <textarea
+          onChange={onPostChange}
+          ref={newPostElement}
+          value={props.newPostText}
+          placeholder="Поделиться новостью"
+        />
+      </div>
+      <div className={classes.button}>
+        <button onClick={addPost}>Добавить пост</button>
+      </div>
 
-            <div className={classes.posts}>
-                {postsElement}
-            </div>
-        </div>
-    );
+      <div className={classes.posts}>{postsElement}</div>
+    </div>
+  );
 }
 
 export default MyPosts;
