@@ -3,11 +3,11 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import {BrowserRouter, Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import Setting from "./components/Setting/Setting";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 function App(props) {
     return (
@@ -16,13 +16,11 @@ function App(props) {
                 <Header/>
                 <NavigationBar/>
                 <div className="app-content">
-                    <Route path='/dialogs' render={() => <Dialogs
-                        dialogsPage={props.state.dialogsPage}
-                        dispatch={props.dispatch}
+                    <Route path='/dialogs' render={() => <DialogsContainer
+                        store={props.store}
                     />}/>
                     <Route path='/profile' render={() => <Profile
-                        profilePage={props.state.profilePage}
-                        dispatch={props.dispatch}
+                        store={props.store}
                         />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
