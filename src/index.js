@@ -4,23 +4,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Provider } from 'react-redux';
 
-export function callSubscriber(state) {
+export function callSubscriber() {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state}
-                dispatch={store.dispatch.bind(store)}
-                store={store}
-            />
+            <Provider store={store}>
+            <App />
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-callSubscriber(store.getState());
-store.subscribe(()=>{
-    let state=store.getState();
-    callSubscriber(state);
+callSubscriber();
+store.subscribe(() => {
+    callSubscriber();
 });
 
 // If you want your app to work offline and load faster, you can change
