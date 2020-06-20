@@ -4,15 +4,20 @@ import * as axios from "axios";
 import UserPhoto from "../../assets/images/avatar.png";
 
 function Users(props) {
-  if (props.users.length === 0) {
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
-      .then((response) => {
-        props.setUsers(response.data.items);
-      });
-  }
+  let getUsers = () => {
+    if (props.users.length === 0) {
+      axios
+        .get("https://social-network.samuraijs.com/api/1.0/users")
+        .then((response) => {
+          props.setUsers(response.data.items);
+        });
+    }
+  };
   return (
     <div>
+      <button className={classes.button} onClick={getUsers()}>
+        Get Users
+      </button>
       {props.users.map((user) => (
         <div key={user.id}>
           <span>
