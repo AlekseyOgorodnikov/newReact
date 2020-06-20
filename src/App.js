@@ -5,9 +5,10 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Profile from "./components/Profile/Profile";
 import News from "./components/News/News";
 import { BrowserRouter, Route } from "react-router-dom";
-import Music from "./components/Music/Music";
 import Setting from "./components/Setting/Setting";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Music from "./components/Music/Music";
+import UserContainer from "./components/Users/UserContainer";
 
 function App(props) {
     return (
@@ -20,8 +21,9 @@ function App(props) {
                     />} />
                     <Route path='/profile' render={() => <Profile
                     />} />
-                    <Route path='/news' render={() => <News />} />
                     <Route path='/music' render={() => <Music />} />
+                    <Route path='/users' render={() => <UserContainer />} />
+                    <Route path='/news' render={() => <News />} />
                     <Route path='/setting' render={() => <Setting />} />
                 </div>
             </div>

@@ -1,0 +1,14 @@
+.avatarImg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.button {
+    /* создаём маленькие отступы, если кнопки перенесутся на две строки */
+    margin: 2px 0;
+    border: solid 1px transparent;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: #ffffff;
+    background-color: #9555af;
+}

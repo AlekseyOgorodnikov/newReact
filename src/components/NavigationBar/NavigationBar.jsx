@@ -18,6 +18,9 @@ function NavigationBar() {
           <NavLink to="/music" activeClassName={classes.active}>Музыка</NavLink>
       </div>
       <div className={classes.item}>
+          <NavLink to="/users" activeClassName={classes.active}>Пользователи</NavLink>
+      </div>
+      <div className={classes.item}>
           <NavLink to="/setting" activeClassName={classes.active}>Настройки</NavLink>
       </div>
     </nav>

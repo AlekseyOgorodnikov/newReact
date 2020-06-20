@@ -1,6 +1,6 @@
 import React from "react";
 
-function Music() {
+function Music(props) {
     return (
         <div>
             Music
