@@ -1,42 +1,14 @@
 const FOLLOW = "FOLLOW";
 const UNFOLOW = "UNFOLOW";
 const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 
 let initialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   photoUrl:'https://manula.r.sizr.io/large/user/2105/img/mona300-thumb2.jpg',
-    //   followed: false,
-    //   firstName: "Дмитрий",
-    //   status: "На работе",
-    //   location: { city: "Минск", country: "Беларусь" },
-    // },
-    // {
-    //   id: 2,
-    //   photoUrl:'http://media.tumblr.com/tumblr_lkdjbyJ7ec1qfz2wv.gif',
-    //   followed: true,
-    //   firstName: "Василий",
-    //   status: "Дома",
-    //   location: { city: "Самара", country: "Россия" },
-    // },
-    // {
-    //   id: 3,
-    //   photoUrl:'https://www.meme-arsenal.com/memes/64778250478209d48c5dbc733a3256b0.jpg',
-    //   followed: false,
-    //   firstName: "Виктор",
-    //   status: "В сети, всегда доступен",
-    //   location: { city: "Киев", country: "Украина" },
-    // },
-    // {
-    //   id: 4,
-    //   photoUrl:'https://www.shareicon.net/data/2015/10/27/140583_normal_300x300.png',
-    //   followed: true,
-    //   firstName: "Алексей",
-    //   status: "В пути",
-    //   location: { city: "Москва", country: "Россия" },
-    // },
-  ],
+  users: [],
+  pageSize: 5,
+  totalUsersCount: 0,
+  currentPage: 2,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -62,7 +34,13 @@ const usersReducer = (state = initialState, action) => {
         }),
       };
     case SET_USERS: {
-      return { ...state, users: [...state.users, ...action.users] };
+      return { ...state, users: action.users };
+    }
+    case SET_CURRENT_PAGE: {
+      return { ...state, currentPage: action.currentPage };
+    }
+    case SET_TOTAL_USERS_COUNT: {
+      return { ...state, totalUsersCount: action.count };
     }
     default:
       return state;
@@ -79,6 +57,12 @@ export const unfollowAC = (userId) => {
 
 export const setUsersAC = (users) => {
   return { type: SET_USERS, users };
+};
+export const setCurrentPagrAC = (currentPage) => {
+  return { type: SET_CURRENT_PAGE, currentPage };
+};
+export const setUsersTotalCountAC = (totalUsersCount) => {
+  return { type: SET_TOTAL_USERS_COUNT, count: totalUsersCount };
 };
 
 export default usersReducer;

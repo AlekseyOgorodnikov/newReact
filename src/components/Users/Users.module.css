@@ -12,3 +12,6 @@
     color: #ffffff;
     background-color: #9555af;
 }
+.selectedPage{
+    font-weight: bold;
+}
