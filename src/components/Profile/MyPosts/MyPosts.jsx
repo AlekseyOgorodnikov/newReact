@@ -4,7 +4,7 @@ import Post from "./Post/Post";
 
 function MyPosts(props) {
   let postsElement = props.posts.map((posts) => (
-    <Post likesCount={posts.likeCounts} message={posts.message} key={posts.id}/>
+    <Post likesCount={posts.likeCounts} message={posts.message} key={posts.id} />
   ));
 
   let newPostElement = React.createRef();
@@ -32,7 +32,6 @@ function MyPosts(props) {
       <div className={classes.button}>
         <button onClick={onAddPost}>Добавить пост</button>
       </div>
-
       <div className={classes.posts}>{postsElement}</div>
     </div>
   );

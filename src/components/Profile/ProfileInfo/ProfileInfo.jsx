@@ -1,18 +1,26 @@
 import React from "react";
 import classes from "./ProfileInfo.module.css";
+import Preloader from "../../common/Preloader/Preloader";
 
 function ProfileInfo(props) {
-    return (
-        <div>
-            <div>
-                <img
-                    className={classes.top_img}
-                    src="https://i.pinimg.com/originals/37/a9/06/37a906be8bd465bb52f092f3f89f9def.jpg"
-                />
-            </div>
-            <div className={classes.descriptionBlock}>ava+description</div>
-        </div>
-    );
+  if (!props.profile) {
+    return <Preloader />;
+  }
+  return (
+    <div>
+      <div>
+        <img
+          className={classes.top_img}
+          src="https://i.pinimg.com/originals/37/a9/06/37a906be8bd465bb52f092f3f89f9def.jpg"
+          alt="Avatarik"
+        />
+      </div>
+      <div className={classes.descriptionBlock}>
+        <img src={props.profile.photos.large} alt="AVATAR" />
+        <span>VK : </span>{props.profile.contacts.vk}
+      </div>  
+    </div>
+  );
 }
 
 export default ProfileInfo;
