@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Users.module.css";
 import UserPhoto from "../../assets/images/avatar.png";
 import { NavLink } from "react-router-dom";
+import * as axios from "axios";
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -45,7 +46,19 @@ let Users = (props) => {
               {user.followed ? (
                 <button
                   onClick={() => {
-                    props.unfollow(user.id);
+                    axios
+                      .delete(
+                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                        {withCredentials: true,
+                        headers: {
+                          "API-KEY": "fcd3f1a5-c049-4a42-9827-179c9da781d8"
+                        }
+                        })
+                      .then((response) => {
+                        if (response.data.resultCode === 0) {
+                          props.unfollow(user.id);
+                        }
+                      });
                   }}
                   className={classes.button}
                 >
@@ -54,7 +67,22 @@ let Users = (props) => {
               ) : (
                 <button
                   onClick={() => {
-                    props.follow(user.id);
+                    axios
+                      .post(
+                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                        {},
+                        {
+                          withCredentials: true,
+                          headers: {
+                            "API-KEY": "fcd3f1a5-c049-4a42-9827-179c9da781d8"
+                          }
+                        }
+                      )
+                      .then((response) => {
+                        if (response.data.resultCode === 0) {
+                          props.follow(user.id);
+                        }
+                      });
                   }}
                   className={classes.button}
                 >
