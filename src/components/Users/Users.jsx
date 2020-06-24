@@ -45,19 +45,26 @@ let Users = (props) => {
             <div>
               {user.followed ? (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )} /*send array type id*/
                   onClick={() => {
+                    props.toggleIsFollowing(true, user.id);
                     axios
                       .delete(
                         `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {withCredentials: true,
-                        headers: {
-                          "API-KEY": "fcd3f1a5-c049-4a42-9827-179c9da781d8"
+                        {
+                          withCredentials: true,
+                          headers: {
+                            "API-KEY": "fcd3f1a5-c049-4a42-9827-179c9da781d8",
+                          },
                         }
-                        })
+                      )
                       .then((response) => {
                         if (response.data.resultCode === 0) {
                           props.unfollow(user.id);
                         }
+                        props.toggleIsFollowing(false, user.id);
                       });
                   }}
                   className={classes.button}
@@ -66,7 +73,11 @@ let Users = (props) => {
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )} /*send array type id*/
                   onClick={() => {
+                    props.toggleIsFollowing(true, user.id);
                     axios
                       .post(
                         `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
@@ -74,14 +85,15 @@ let Users = (props) => {
                         {
                           withCredentials: true,
                           headers: {
-                            "API-KEY": "fcd3f1a5-c049-4a42-9827-179c9da781d8"
-                          }
+                            "API-KEY": "fcd3f1a5-c049-4a42-9827-179c9da781d8",
+                          },
                         }
                       )
                       .then((response) => {
                         if (response.data.resultCode === 0) {
                           props.follow(user.id);
                         }
+                        props.toggleIsFollowing(false, user.id);
                       });
                   }}
                   className={classes.button}
