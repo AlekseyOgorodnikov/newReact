@@ -1,3 +1,5 @@
+import { usersAPI } from "../API/API";
+
 const FOLLOW = "FOLLOW";
 const UNFOLOW = "UNFOLOW";
 const SET_USERS = "SET_USERS";
@@ -62,11 +64,11 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export const follow = (userId) => {
+export const followSuccess = (userId) => {
   return { type: FOLLOW, userId };
 };
 
-export const unfollow = (userId) => {
+export const unfollowSuccess = (userId) => {
   return { type: UNFOLOW, userId };
 };
 
@@ -84,6 +86,39 @@ export const toggleIsFetching = (isFetching) => {
 };
 export const toggleIsFollowing = (isFetching, userId) => {
   return { type: FOLLOWING_PROGRESS, isFetching, userId };
+};
+//redux-thunk
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setUsersTotalCount(data.totalCount));
+    });
+  };
+};
+export const follow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleIsFollowing(true, userId));
+    usersAPI.follow(userId).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(followSuccess(userId));
+      }
+      dispatch(toggleIsFollowing(false, userId));
+    });
+  };
+};
+export const unfollow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleIsFollowing(true, userId));
+    usersAPI.unfollow(userId).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(unfollowSuccess(userId));
+      }
+      dispatch(toggleIsFollowing(false, userId));
+    });
+  };
 };
 
 export default usersReducer;
