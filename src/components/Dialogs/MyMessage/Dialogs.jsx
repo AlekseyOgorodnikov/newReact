@@ -1,7 +1,9 @@
+/* eslint-disable eqeqeq */
 import React from "react";
 import classes from "../Dialogs.module.css";
 import DialogItem from "../DialogItem/DialogsItem";
 import Message from "./Message/Message";
+import { Redirect } from "react-router-dom";
 
 function Dialogs(props) {
   let state = props.dialogPage;
@@ -24,6 +26,8 @@ function Dialogs(props) {
     let text = newMessageElement.current.value;
     props.updateNewMessageText(text);
   }
+
+  if(!props.isAuth)return <Redirect to={"/login"}/>;
 
   return (
     <div className={classes.dialogs}>
