@@ -3,7 +3,7 @@ import React from "react";
 class ProfileStatus extends React.Component {
   state = {
     editMode: false,
-    title: "yo",
+    status: this.props.status,
   };
 
   activateEditMode = () => {
@@ -16,6 +16,14 @@ class ProfileStatus extends React.Component {
     this.setState({
       editMode: false,
     });
+    this.props.updateStatus(this.state.status);
+  };
+
+  onStatusChange = (event) => {
+    // send object and here status
+    this.setState({
+      status: event.currentTarget.value,
+    });
   };
 
   render() {
@@ -24,16 +32,19 @@ class ProfileStatus extends React.Component {
         {!this.state.editMode && (
           <div>
             <span onDoubleClick={this.activateEditMode}>
-              {this.props.status}
+              {/* status in server answer, show status with server */}
+              {this.props.status || "....."}
             </span>
           </div>
         )}
         {this.state.editMode && (
           <div>
             <input
+              onChange={this.onStatusChange}
               autoFocus={true}
               onBlur={this.deActivateEditMode}
-              value={this.props.status}
+              // show status local state
+              value={this.state.status}
             />
           </div>
         )}

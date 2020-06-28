@@ -18,9 +18,13 @@ function ProfileInfo(props) {
       </div>
       <div className={classes.descriptionBlock}>
         <img src={props.profile.photos.large} alt="AVATAR" />
-        <span>VK : </span>{props.profile.contacts.vk}
-        <ProfileStatus status={"Hello my props"}/>
-      </div>  
+        <span>VK : </span>
+        {props.profile.contacts.vk}
+        <ProfileStatus
+          status={props.status}
+          updateStatus={props.updateStatus}
+        />
+      </div>
     </div>
   );
 }
