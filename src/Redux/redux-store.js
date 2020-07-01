@@ -5,6 +5,7 @@ import profileReducer from './profileReducer';
 import usersReducer from './usersReducer';
 import authReducer from './authReducer';
 import thunkMiddleware from 'redux-thunk';
+import {reducer as fromReducer} from 'redux-form';
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -12,6 +13,8 @@ let reducers = combineReducers({
     sidebar: sideBarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    // warrning form
+    form:fromReducer,
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

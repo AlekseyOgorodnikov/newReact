@@ -25,7 +25,7 @@ class ProfileStatus extends React.Component {
       status: event.currentTarget.value,
     });
   };
-
+//update status (if status has com and not equal previous, then save new state)
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.status !== this.props.status) {
       this.setState({
