@@ -11,9 +11,9 @@ function Header(props) {
         alt="Logotipe"
       />
       <div className={classes.loginBlock}>
-        { props.isAuth ? props.login
+        { props.isAuth 
+        ? <div>{props.login} - <button onClick={props.logout}>Выйти</button></div>
         :<NavLink to={'/login'}>Login</NavLink>}
-
       </div>
     </div>
   );
