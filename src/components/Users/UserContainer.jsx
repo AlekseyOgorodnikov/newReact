@@ -31,6 +31,8 @@ class UsersContainer extends React.Component {
     this.props.getUsersThunkCreator(pagesNumber, this.props.pageSize);
   };
   render() {
+    console.log("USERS");
+
     return (
       <>
         {this.props.isFetching ? <Preloader /> : null}
