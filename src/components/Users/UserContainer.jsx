@@ -12,11 +12,11 @@ import Preloader from "../common/Preloader/Preloader";
 import { compose } from "redux";
 import {
   getPageSize,
-  getUsers,
   getTotalUsersCount,
   getCurrentPage,
   getIsFetching,
   getFollowingInProgress,
+  getUsers,
 } from "../../Redux/usersSelectors";
 
 //class components with get API data, and create object
@@ -63,7 +63,7 @@ class UsersContainer extends React.Component {
 // };
 let mapStateToProps = (state) => {
   console.log("mapStateToProps USERS");
-  
+
   return {
     users: getUsers(state),
     pageSize: getPageSize(state),
