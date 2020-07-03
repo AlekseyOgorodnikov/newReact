@@ -11,36 +11,37 @@ class ProfileStatus extends React.Component {
       editMode: true,
     });
   };
-
-  deActivateEditMode = () => {
+  deactivateEditMode() {
     this.setState({
       editMode: false,
     });
     this.props.updateStatus(this.state.status);
-  };
+  }
 
-  onStatusChange = (event) => {
-    // send object and here status
+  onStatusChange = (e) => {
     this.setState({
-      status: event.currentTarget.value,
+      status: e.currentTarget.value,
     });
   };
-//update status (if status has com and not equal previous, then save new state)
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.status !== this.props.status) {
       this.setState({
         status: this.props.status,
       });
     }
+
+    console.log("componentDidUpdate");
   }
+
   render() {
+    console.log("render");
     return (
       <div>
         {!this.state.editMode && (
           <div>
             <span onDoubleClick={this.activateEditMode}>
-              {/* status in server answer, show status with server */}
-              {this.props.status || "....."}
+              {this.props.status || "-------"}
             </span>
           </div>
         )}
@@ -49,8 +50,7 @@ class ProfileStatus extends React.Component {
             <input
               onChange={this.onStatusChange}
               autoFocus={true}
-              onBlur={this.deActivateEditMode}
-              // show status local state
+              onBlur={this.deactivateEditMode.bind(this)}
               value={this.state.status}
             />
           </div>

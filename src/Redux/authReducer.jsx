@@ -17,14 +17,16 @@ const authReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+
     default:
       return state;
   }
 };
 
-export const setAuthUserData = (userId, email, login, isAuth) => {
-  return { type: SET_USER_DATA, payload: { userId, email, login, isAuth } };
-};
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+  type: SET_USER_DATA,
+  payload: { userId, email, login, isAuth },
+});
 
 export const getAuthUserData = () => (dispatch) => {
   return authAPI.me().then((response) => {
@@ -43,7 +45,7 @@ export const login = (email, password, rememberMe) => (dispatch) => {
       let message =
         response.data.messages.length > 0
           ? response.data.messages[0]
-          : "E-mail или пароль введены не верно!";
+          : "Some error";
       dispatch(stopSubmit("login", { _error: message }));
     }
   });
