@@ -4,11 +4,10 @@ import { stopSubmit } from "redux-form";
 const SET_USER_DATA = "SET_USER_DATA";
 
 let initialState = {
-  id: null,
+  userId: null,
   email: null,
   login: null,
   isAuth: false,
-  isFetching: true,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -23,14 +22,14 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setAuthUserData = (id, email, login, isAuth) => {
-  return { type: SET_USER_DATA, payload: { id, email, login, isAuth } };
+export const setAuthUserData = (userId, email, login, isAuth) => {
+  return { type: SET_USER_DATA, payload: { userId, email, login, isAuth } };
 };
 
 export const getAuthUserData = () => (dispatch) => {
-  authAPI.me().then((response) => {
+  return authAPI.me().then((response) => {
     if (response.data.resultCode === 0) {
-      let { id, email, login } = response.data.data;
+      let { id, login, email } = response.data.data;
       dispatch(setAuthUserData(id, email, login, true));
     }
   });

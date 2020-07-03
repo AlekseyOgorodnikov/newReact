@@ -9,7 +9,6 @@ import {
 } from "../../Redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { withAuthRedirect } from "../../hoc/WithAuthRedirect";
 import { compose } from "redux";
 
 //class components with get API data, and create object
@@ -54,7 +53,6 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-  withAuthRedirect,
   connect(mapStateToProps, {
     follow,
     unfollow,
