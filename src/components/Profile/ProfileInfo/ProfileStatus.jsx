@@ -23,7 +23,7 @@ class ProfileStatus extends React.Component {
       status: eventObject.currentTarget.value,
     });
   };
-
+  //вызываюсь каждый раз когда компонента меняется и проверяю да /нет(метод жизненного цикла)
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.status !== this.props.status) {
       this.setState({

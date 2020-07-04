@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 function ProfileInfo(props) {
   if (!props.profile) {
@@ -20,7 +20,7 @@ function ProfileInfo(props) {
         <img src={props.profile.photos.large} alt="AVATAR" />
         <span>VK : </span>
         {props.profile.contacts.vk}
-        <ProfileStatus
+        <ProfileStatusWithHooks
           status={props.status}
           updateStatus={props.updateStatus}
         />
