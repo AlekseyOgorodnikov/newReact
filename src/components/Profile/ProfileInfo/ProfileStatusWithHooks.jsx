@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ProfileStatusWithHooks = (props) => {
   //array two elements
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
+
+  useEffect(() => {
+    setStatus(props.status);
+  }, [props.status]);
 
   const activateMode = () => {
     setEditMode(true);
@@ -13,6 +17,7 @@ const ProfileStatusWithHooks = (props) => {
     setEditMode(false);
     props.updateStatus(status);
   };
+  //изменения в локальном state
   const onStatusChange = (eventObject) => {
     setStatus(eventObject.currentTarget.value);
   };
