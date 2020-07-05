@@ -8,15 +8,18 @@ import {
 } from "../../../utills/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 
+const MyPosts = React.memo((props) => {
+  // React.memo делает отрисовку один раз, пока нет изменений в State
+  // PureComponent делае тоже самое без проверок
+  // Проверка на рендеринг, для простого и быстрострого отображения в один рендер
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps !== this.props || nextState !== this.state;
+  // }
+  console.log("RENDER NOw! RENDER NOw! RENDER NOw! RENDER NOw! RENDER NOw!");
 
-function MyPosts(props) {
   let postsElement = props.posts.map((posts, id) => {
     return (
-      <Post
-        likesCount={posts.likeCounts}
-        message={posts.message}
-        key={id}
-      />
+      <Post likesCount={posts.likeCounts} message={posts.message} key={id} />
     );
   });
 
@@ -31,7 +34,7 @@ function MyPosts(props) {
       <div className={classes.posts}>{postsElement}</div>
     </div>
   );
-}
+});
 
 const maxLenght10 = maxLengthCreatore(10);
 
