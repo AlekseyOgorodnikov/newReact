@@ -22,17 +22,14 @@ import {
 //class components with get API data, and create object
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.getUsersThunkCreator(
-      this.props.currentPage,
-      this.props.pageSize
-    );
+    let { currentPage, pageSize } = this.props;
+    this.props.getUsersThunkCreator(currentPage, pageSize);
   }
   onPageChanched = (pagesNumber) => {
-    this.props.getUsersThunkCreator(pagesNumber, this.props.pageSize);
+    let { pageSize } = this.props;
+    this.props.getUsersThunkCreator(pagesNumber, pageSize);
   };
   render() {
-    console.log("USERS");
-
     return (
       <>
         {this.props.isFetching ? <Preloader /> : null}
@@ -62,8 +59,6 @@ class UsersContainer extends React.Component {
 //   };
 // };
 let mapStateToProps = (state) => {
-  console.log("mapStateToProps USERS");
-
   return {
     users: getUsers(state),
     pageSize: getPageSize(state),
