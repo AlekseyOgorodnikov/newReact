@@ -15,9 +15,8 @@ const MyPosts = React.memo((props) => {
   // shouldComponentUpdate(nextProps, nextState) {
   //   return nextProps !== this.props || nextState !== this.state;
   // }
-  console.log("RENDER NOw! RENDER NOw! RENDER NOw! RENDER NOw! RENDER NOw!");
-
-  let postsElement = props.posts.map((posts, id) => {
+  //clean function-copy post warrning
+  let postsElement = [...props.posts].reverse().map((posts, id) => {
     return (
       <Post likesCount={posts.likeCounts} message={posts.message} key={id} />
     );
