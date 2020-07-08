@@ -4,27 +4,27 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import UserPhoto from "../../../assets/images/avatar.png";
 
-function ProfileInfo(props) {
-  if (!props.profile) {
+function ProfileInfo({ profile, status, updateStatus, isOwner, savePhoto }) {
+  if (!profile) {
     return <Preloader />;
   }
+  const onMainphotoSelected = (event) => {
+    if (event.target.files.length) {
+      savePhoto(event.target.files[0]);
+    }
+  };
   return (
     <div>
       <div className={classes.descriptionBlock}>
         <img
-          src={
-            props.profile.photos.large != null
-              ? props.profile.photos.large
-              : UserPhoto
-          }
+          src={profile.photos.large || UserPhoto}
+          className={classes.mainPhoto}
           alt="AVATAR"
         />
+        {isOwner && <input type={"file"} onChange={onMainphotoSelected} />}
         <span>VK : </span>
-        {props.profile.contacts.vk}
-        <ProfileStatusWithHooks
-          status={props.status}
-          updateStatus={props.updateStatus}
-        />
+        {profile.contacts.vk}
+        <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
       </div>
     </div>
   );
