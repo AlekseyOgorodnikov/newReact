@@ -8,7 +8,7 @@ import { login } from "../../Redux/authReducer";
 import { Redirect } from "react-router-dom";
 import styles from "../common/FormsControls/FormControls.module.css";
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (
     <form onSubmit={handleSubmit}>
       {createField("E-mail", "email", [required], Input)}
@@ -23,6 +23,9 @@ const LoginForm = ({ handleSubmit, error }) => {
         { type: "checkbox" },
         "Запомнить"
       )}
+      {captchaUrl && <img src={captchaUrl} alt="Captcha" />}
+      {captchaUrl &&
+        createField("Symbols from image", "captcha", [required], Input, {})}
       {error && <div className={styles.formError}>{error}</div>}
       <div>
         <button>Войти</button>
@@ -38,7 +41,12 @@ const LoginReduxFrom = reduxForm({
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    props.login(formData.email, formData.password, formData.rememberMe);
+    props.login(
+      formData.email,
+      formData.password,
+      formData.rememberMe,
+      formData.captcha
+    );
   };
 
   if (props.isAuth) {
@@ -47,11 +55,12 @@ const Login = (props) => {
   return (
     <div>
       <h1 className={classes.Login}>Войти в учетную запись</h1>
-      <LoginReduxFrom onSubmit={onSubmit} />
+      <LoginReduxFrom onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
     </div>
   );
 };
 const mapStateToProps = (state) => ({
+  captchaUrl: state.auth.captchaUrl,
   isAuth: state.auth.isAuth,
 });
 
