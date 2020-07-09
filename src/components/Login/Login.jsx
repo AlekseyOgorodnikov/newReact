@@ -23,7 +23,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
         { type: "checkbox" },
         "Запомнить"
       )}
-      {captchaUrl && <img src={captchaUrl} alt="Captcha" />}
+      {captchaUrl && <img src={captchaUrl} />}
       {captchaUrl &&
         createField("Symbols from image", "captcha", [required], Input, {})}
       {error && <div className={styles.formError}>{error}</div>}
@@ -55,7 +55,7 @@ const Login = (props) => {
   return (
     <div>
       <h1 className={classes.Login}>Войти в учетную запись</h1>
-      <LoginReduxFrom onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
+      <LoginReduxFrom onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     </div>
   );
 };
